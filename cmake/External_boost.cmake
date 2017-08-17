@@ -62,8 +62,6 @@ if(use_bat)
   set(boost_cmds
     CONFIGURE_COMMAND bootstrap.bat
     BUILD_COMMAND b2 address-model=${am} ${boost_with_args}
-    INSTALL_COMMAND b2 address-model=${am} ${boost_with_args}
-      --prefix=<INSTALL_DIR> install
   )
 else()
   list(APPEND boost_with_args
@@ -71,8 +69,6 @@ else()
   set(boost_cmds
     CONFIGURE_COMMAND ./bootstrap.sh --prefix=<INSTALL_DIR>
     BUILD_COMMAND ./b2 address-model=${am} ${boost_with_args}
-    INSTALL_COMMAND ./b2 address-model=${am} ${boost_with_args}
-      install
   )
 endif(use_bat)
 
@@ -83,6 +79,7 @@ ExternalProject_Add(boost
   SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/boost"
   INSTALL_DIR "${GameLiftServerSdk_INSTALL_PREFIX}"
   ${boost_cmds}
+  INSTALL_COMMAND ""
   BUILD_IN_SOURCE 1
   CMAKE_CACHE_ARGS
       ${GameLiftServerSdk_DEFAULT_ARGS}
@@ -90,12 +87,17 @@ ExternalProject_Add(boost
 )
 
 ExternalProject_Get_Property(boost install_dir)
-set(BOOST_ROOT "${install_dir}" CACHE INTERNAL "")
+set(BOOST_ROOT "${CMAKE_CURRENT_BINARY_DIR}/boost" CACHE INTERNAL "")
+set(BOOST_LIB "${BOOST_ROOT}/stage/lib" CACHE INTERNAL "")
 
 list(APPEND GameLiftServerSdk_THIRDPARTYLIBS_ARGS
 # Add Boost properties so correct version of Boost is found.
   "-DBOOST_ROOT:PATH=${BOOST_ROOT}"
-  "-DBoost_INCLUDE_DIR:PATH=${BOOST_ROOT}/include"
-  "-DBOOST_LIBRARYDIR:PATH=${BOOST_ROOT}/lib"
+  "-DBoost_INCLUDE_DIR:PATH=${BOOST_ROOT}"
+  "-DBOOST_LIBRARYDIR:PATH=${BOOST_LIB}"
   "-DBoost_NO_SYSTEM_PATHS:BOOL=ON"
   "-DBoost_USE_STATIC_LIBS:BOOL=${Boost_USE_STATIC_LIBS}")
+
+add_custom_command(TARGET boost POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                   ${BOOST_LIB} ${GameLiftServerSdk_INSTALL_PREFIX}/lib)

@@ -145,6 +145,8 @@ Aws::GameLift::Server::Model::GameSession Network::ParseFromBufferedGameSession(
     gameSession.SetName(bGameSession.name().c_str());
     gameSession.SetPort(bGameSession.port());
     gameSession.SetIpAddress(bGameSession.ipaddress().c_str());
+    gameSession.SetGameSessionData(bGameSession.gamesessiondata().c_str());
+    gameSession.SetMatchmakerData(bGameSession.matchmakerdata().c_str());
 
 	std::vector<GameProperty> gameProperties;
 	for (int i = 0; i < bGameSession.gameproperties_size(); i++)
@@ -171,6 +173,8 @@ Aws::GameLift::Server::Model::GameSession Network::ParseFromBufferedGameSession(
     gameSession.SetName(bGameSession.name().c_str());
     gameSession.SetPort(bGameSession.port());
     gameSession.SetIpAddress(bGameSession.ipaddress().c_str());
+    gameSession.SetGameSessionData(bGameSession.gamesessiondata().c_str());
+    gameSession.SetMatchmakerData(bGameSession.matchmakerdata().c_str());
 
     for (int i = 0; i < bGameSession.gameproperties_size(); i++)
     {

@@ -167,12 +167,19 @@ class ProcessReady : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 port() const;
   void set_port(::google::protobuf::int32 value);
 
+  // optional int32 maxConcurrentGameSessions = 3;
+  void clear_maxconcurrentgamesessions();
+  static const int kMaxConcurrentGameSessionsFieldNumber = 3;
+  ::google::protobuf::int32 maxconcurrentgamesessions() const;
+  void set_maxconcurrentgamesessions(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::std::string> logpathstoupload_;
   ::google::protobuf::int32 port_;
+  ::google::protobuf::int32 maxconcurrentgamesessions_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_sdk_2eproto_impl();
   friend void  protobuf_AddDesc_sdk_2eproto_impl();
@@ -344,12 +351,19 @@ class GameSessionActivate : public ::google::protobuf::Message /* @@protoc_inser
   ::google::protobuf::int32 maxplayers() const;
   void set_maxplayers(::google::protobuf::int32 value);
 
+  // optional int32 port = 3;
+  void clear_port();
+  static const int kPortFieldNumber = 3;
+  ::google::protobuf::int32 port() const;
+  void set_port(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr gamesessionid_;
   ::google::protobuf::int32 maxplayers_;
+  ::google::protobuf::int32 port_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_sdk_2eproto_impl();
   friend void  protobuf_AddDesc_sdk_2eproto_impl();
@@ -1527,6 +1541,28 @@ class GameSession : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int32 port() const;
   void set_port(::google::protobuf::int32 value);
 
+  // optional string gameSessionData = 9;
+  void clear_gamesessiondata();
+  static const int kGameSessionDataFieldNumber = 9;
+  const ::std::string& gamesessiondata() const;
+  void set_gamesessiondata(const ::std::string& value);
+  void set_gamesessiondata(const char* value);
+  void set_gamesessiondata(const char* value, size_t size);
+  ::std::string* mutable_gamesessiondata();
+  ::std::string* release_gamesessiondata();
+  void set_allocated_gamesessiondata(::std::string* gamesessiondata);
+
+  // optional string matchmakerData = 10;
+  void clear_matchmakerdata();
+  static const int kMatchmakerDataFieldNumber = 10;
+  const ::std::string& matchmakerdata() const;
+  void set_matchmakerdata(const ::std::string& value);
+  void set_matchmakerdata(const char* value);
+  void set_matchmakerdata(const char* value, size_t size);
+  ::std::string* mutable_matchmakerdata();
+  ::std::string* release_matchmakerdata();
+  void set_allocated_matchmakerdata(::std::string* matchmakerdata);
+
   // @@protoc_insertion_point(class_scope:com.amazon.whitewater.auxproxy.pbuffer.GameSession)
  private:
 
@@ -1536,6 +1572,8 @@ class GameSession : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::ArenaStringPtr fleetid_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr ipaddress_;
+  ::google::protobuf::internal::ArenaStringPtr gamesessiondata_;
+  ::google::protobuf::internal::ArenaStringPtr matchmakerdata_;
   ::google::protobuf::int32 maxplayers_;
   bool joinable_;
   ::google::protobuf::int32 port_;
@@ -1913,6 +1951,20 @@ inline void ProcessReady::set_port(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.port)
 }
 
+// optional int32 maxConcurrentGameSessions = 3;
+inline void ProcessReady::clear_maxconcurrentgamesessions() {
+  maxconcurrentgamesessions_ = 0;
+}
+inline ::google::protobuf::int32 ProcessReady::maxconcurrentgamesessions() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.maxConcurrentGameSessions)
+  return maxconcurrentgamesessions_;
+}
+inline void ProcessReady::set_maxconcurrentgamesessions(::google::protobuf::int32 value) {
+  
+  maxconcurrentgamesessions_ = value;
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.maxConcurrentGameSessions)
+}
+
 inline const ProcessReady* ProcessReady::internal_default_instance() {
   return &ProcessReady_default_instance_.get();
 }
@@ -1983,6 +2035,20 @@ inline void GameSessionActivate::set_maxplayers(::google::protobuf::int32 value)
   
   maxplayers_ = value;
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.maxPlayers)
+}
+
+// optional int32 port = 3;
+inline void GameSessionActivate::clear_port() {
+  port_ = 0;
+}
+inline ::google::protobuf::int32 GameSessionActivate::port() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.port)
+  return port_;
+}
+inline void GameSessionActivate::set_port(::google::protobuf::int32 value) {
+  
+  port_ = value;
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.port)
 }
 
 inline const GameSessionActivate* GameSessionActivate::internal_default_instance() {
@@ -3035,6 +3101,94 @@ inline void GameSession::set_port(::google::protobuf::int32 value) {
   
   port_ = value;
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.port)
+}
+
+// optional string gameSessionData = 9;
+inline void GameSession::clear_gamesessiondata() {
+  gamesessiondata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& GameSession::gamesessiondata() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  return gamesessiondata_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GameSession::set_gamesessiondata(const ::std::string& value) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+inline void GameSession::set_gamesessiondata(const char* value) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+inline void GameSession::set_gamesessiondata(const char* value, size_t size) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+inline ::std::string* GameSession::mutable_gamesessiondata() {
+  
+  // @@protoc_insertion_point(field_mutable:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  return gamesessiondata_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* GameSession::release_gamesessiondata() {
+  // @@protoc_insertion_point(field_release:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  
+  return gamesessiondata_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GameSession::set_allocated_gamesessiondata(::std::string* gamesessiondata) {
+  if (gamesessiondata != NULL) {
+    
+  } else {
+    
+  }
+  gamesessiondata_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), gamesessiondata);
+  // @@protoc_insertion_point(field_set_allocated:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+
+// optional string matchmakerData = 10;
+inline void GameSession::clear_matchmakerdata() {
+  matchmakerdata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& GameSession::matchmakerdata() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  return matchmakerdata_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GameSession::set_matchmakerdata(const ::std::string& value) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+inline void GameSession::set_matchmakerdata(const char* value) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+inline void GameSession::set_matchmakerdata(const char* value, size_t size) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+inline ::std::string* GameSession::mutable_matchmakerdata() {
+  
+  // @@protoc_insertion_point(field_mutable:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  return matchmakerdata_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* GameSession::release_matchmakerdata() {
+  // @@protoc_insertion_point(field_release:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  
+  return matchmakerdata_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GameSession::set_allocated_matchmakerdata(::std::string* matchmakerdata) {
+  if (matchmakerdata != NULL) {
+    
+  } else {
+    
+  }
+  matchmakerdata_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), matchmakerdata);
+  // @@protoc_insertion_point(field_set_allocated:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
 }
 
 inline const GameSession* GameSession::internal_default_instance() {

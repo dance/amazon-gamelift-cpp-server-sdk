@@ -86,9 +86,10 @@ void protobuf_AssignDesc_sdk_2eproto() {
       "sdk.proto");
   GOOGLE_CHECK(file != NULL);
   ProcessReady_descriptor_ = file->message_type(0);
-  static const int ProcessReady_offsets_[2] = {
+  static const int ProcessReady_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessReady, logpathstoupload_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessReady, port_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessReady, maxconcurrentgamesessions_),
   };
   ProcessReady_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -114,9 +115,10 @@ void protobuf_AssignDesc_sdk_2eproto() {
       sizeof(ProcessEnding),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ProcessEnding, _internal_metadata_));
   GameSessionActivate_descriptor_ = file->message_type(2);
-  static const int GameSessionActivate_offsets_[2] = {
+  static const int GameSessionActivate_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSessionActivate, gamesessionid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSessionActivate, maxplayers_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSessionActivate, port_),
   };
   GameSessionActivate_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -279,7 +281,7 @@ void protobuf_AssignDesc_sdk_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _internal_metadata_));
   Response_Status_descriptor_ = Response_descriptor_->enum_type(0);
   GameSession_descriptor_ = file->message_type(13);
-  static const int GameSession_offsets_[8] = {
+  static const int GameSession_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, gamesessionid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, fleetid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, name_),
@@ -288,6 +290,8 @@ void protobuf_AssignDesc_sdk_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, gameproperties_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, ipaddress_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, port_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, gamesessiondata_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GameSession, matchmakerdata_),
   };
   GameSession_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -481,45 +485,47 @@ void protobuf_AddDesc_sdk_2eproto_impl() {
   protobuf_InitDefaults_sdk_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\tsdk.proto\022&com.amazon.whitewater.auxpr"
-    "oxy.pbuffer\"6\n\014ProcessReady\022\030\n\020logPathsT"
-    "oUpload\030\001 \003(\t\022\014\n\004port\030\002 \001(\005\"\017\n\rProcessEn"
-    "ding\"@\n\023GameSessionActivate\022\025\n\rgameSessi"
-    "onId\030\001 \001(\t\022\022\n\nmaxPlayers\030\002 \001(\005\"-\n\024GameSe"
-    "ssionTerminate\022\025\n\rgameSessionId\030\001 \001(\t\"b\n"
-    "!UpdatePlayerSessionCreationPolicy\022\025\n\rga"
-    "meSessionId\030\001 \001(\t\022&\n\036newPlayerSessionCre"
-    "ationPolicy\030\002 \001(\t\"E\n\023AcceptPlayerSession"
+    "oxy.pbuffer\"Y\n\014ProcessReady\022\030\n\020logPathsT"
+    "oUpload\030\001 \003(\t\022\014\n\004port\030\002 \001(\005\022!\n\031maxConcur"
+    "rentGameSessions\030\003 \001(\005\"\017\n\rProcessEnding\""
+    "N\n\023GameSessionActivate\022\025\n\rgameSessionId\030"
+    "\001 \001(\t\022\022\n\nmaxPlayers\030\002 \001(\005\022\014\n\004port\030\003 \001(\005\""
+    "-\n\024GameSessionTerminate\022\025\n\rgameSessionId"
+    "\030\001 \001(\t\"b\n!UpdatePlayerSessionCreationPol"
+    "icy\022\025\n\rgameSessionId\030\001 \001(\t\022&\n\036newPlayerS"
+    "essionCreationPolicy\030\002 \001(\t\"E\n\023AcceptPlay"
+    "erSession\022\025\n\rgameSessionId\030\001 \001(\t\022\027\n\017play"
+    "erSessionId\030\002 \001(\t\"E\n\023RemovePlayerSession"
     "\022\025\n\rgameSessionId\030\001 \001(\t\022\027\n\017playerSession"
-    "Id\030\002 \001(\t\"E\n\023RemovePlayerSession\022\025\n\rgameS"
-    "essionId\030\001 \001(\t\022\027\n\017playerSessionId\030\002 \001(\t\""
-    "$\n\014ReportHealth\022\024\n\014healthStatus\030\001 \001(\010\"\246\001"
-    "\n\035DescribePlayerSessionsRequest\022\025\n\rgameS"
-    "essionId\030\001 \001(\t\022\020\n\010playerId\030\002 \001(\t\022\027\n\017play"
-    "erSessionId\030\003 \001(\t\022!\n\031playerSessionStatus"
-    "Filter\030\004 \001(\t\022\021\n\tnextToken\030\005 \001(\t\022\r\n\005limit"
-    "\030\006 \001(\005\"_\n\023ActivateGameSession\022H\n\013gameSes"
-    "sion\030\001 \001(\01323.com.amazon.whitewater.auxpr"
-    "oxy.pbuffer.GameSession\"\022\n\020TerminateProc"
-    "ess\"\202\001\n\036DescribePlayerSessionsResponse\022\021"
-    "\n\tnextToken\030\001 \001(\t\022M\n\016playerSessions\030\002 \003("
-    "\01325.com.amazon.whitewater.auxproxy.pbuff"
-    "er.PlayerSession\"\206\001\n\010Response\022G\n\006status\030"
-    "\001 \001(\01627.com.amazon.whitewater.auxproxy.p"
-    "buffer.Response.Status\022\024\n\014errorMessage\030\002"
-    " \001(\t\"\033\n\006Status\022\006\n\002OK\020\000\022\t\n\005ERROR\020\001\"\330\001\n\013Ga"
-    "meSession\022\025\n\rgameSessionId\030\001 \001(\t\022\017\n\007flee"
-    "tId\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\022\n\nmaxPlayers\030\004 "
-    "\001(\005\022\020\n\010joinable\030\005 \001(\010\022L\n\016gameProperties\030"
-    "\006 \003(\01324.com.amazon.whitewater.auxproxy.p"
-    "buffer.GameProperty\022\021\n\tipAddress\030\007 \001(\t\022\014"
-    "\n\004port\030\010 \001(\005\"*\n\014GameProperty\022\013\n\003key\030\001 \001("
-    "\t\022\r\n\005value\030\002 \001(\t\"\326\001\n\rPlayerSession\022\027\n\017pl"
-    "ayerSessionId\030\001 \001(\t\022\020\n\010playerId\030\002 \001(\t\022\025\n"
-    "\rgameSessionId\030\003 \001(\t\022\017\n\007fleetId\030\004 \001(\t\022\021\n"
-    "\tipAddress\030\005 \001(\t\022\016\n\006status\030\006 \001(\t\022\024\n\014crea"
-    "tionTime\030\007 \001(\003\022\027\n\017terminationTime\030\010 \001(\003\022"
-    "\014\n\004port\030\t \001(\005\022\022\n\nplayerData\030\n \001(\tb\006proto"
-    "3", 1561);
+    "Id\030\002 \001(\t\"$\n\014ReportHealth\022\024\n\014healthStatus"
+    "\030\001 \001(\010\"\246\001\n\035DescribePlayerSessionsRequest"
+    "\022\025\n\rgameSessionId\030\001 \001(\t\022\020\n\010playerId\030\002 \001("
+    "\t\022\027\n\017playerSessionId\030\003 \001(\t\022!\n\031playerSess"
+    "ionStatusFilter\030\004 \001(\t\022\021\n\tnextToken\030\005 \001(\t"
+    "\022\r\n\005limit\030\006 \001(\005\"_\n\023ActivateGameSession\022H"
+    "\n\013gameSession\030\001 \001(\01323.com.amazon.whitewa"
+    "ter.auxproxy.pbuffer.GameSession\"\022\n\020Term"
+    "inateProcess\"\202\001\n\036DescribePlayerSessionsR"
+    "esponse\022\021\n\tnextToken\030\001 \001(\t\022M\n\016playerSess"
+    "ions\030\002 \003(\01325.com.amazon.whitewater.auxpr"
+    "oxy.pbuffer.PlayerSession\"\206\001\n\010Response\022G"
+    "\n\006status\030\001 \001(\01627.com.amazon.whitewater.a"
+    "uxproxy.pbuffer.Response.Status\022\024\n\014error"
+    "Message\030\002 \001(\t\"\033\n\006Status\022\006\n\002OK\020\000\022\t\n\005ERROR"
+    "\020\001\"\211\002\n\013GameSession\022\025\n\rgameSessionId\030\001 \001("
+    "\t\022\017\n\007fleetId\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\022\n\nmaxP"
+    "layers\030\004 \001(\005\022\020\n\010joinable\030\005 \001(\010\022L\n\016gamePr"
+    "operties\030\006 \003(\01324.com.amazon.whitewater.a"
+    "uxproxy.pbuffer.GameProperty\022\021\n\tipAddres"
+    "s\030\007 \001(\t\022\014\n\004port\030\010 \001(\005\022\027\n\017gameSessionData"
+    "\030\t \001(\t\022\026\n\016matchmakerData\030\n \001(\t\"*\n\014GamePr"
+    "operty\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"\326\001\n\rP"
+    "layerSession\022\027\n\017playerSessionId\030\001 \001(\t\022\020\n"
+    "\010playerId\030\002 \001(\t\022\025\n\rgameSessionId\030\003 \001(\t\022\017"
+    "\n\007fleetId\030\004 \001(\t\022\021\n\tipAddress\030\005 \001(\t\022\016\n\006st"
+    "atus\030\006 \001(\t\022\024\n\014creationTime\030\007 \001(\003\022\027\n\017term"
+    "inationTime\030\010 \001(\003\022\014\n\004port\030\t \001(\005\022\022\n\nplaye"
+    "rData\030\n \001(\tb\006proto3", 1659);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "sdk.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_sdk_2eproto);
@@ -552,6 +558,7 @@ static void MergeFromFail(int line) {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ProcessReady::kLogPathsToUploadFieldNumber;
 const int ProcessReady::kPortFieldNumber;
+const int ProcessReady::kMaxConcurrentGameSessionsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ProcessReady::ProcessReady()
@@ -573,7 +580,8 @@ ProcessReady::ProcessReady(const ProcessReady& from)
 }
 
 void ProcessReady::SharedCtor() {
-  port_ = 0;
+  ::memset(&port_, 0, reinterpret_cast<char*>(&maxconcurrentgamesessions_) -
+    reinterpret_cast<char*>(&port_) + sizeof(maxconcurrentgamesessions_));
   _cached_size_ = 0;
 }
 
@@ -612,7 +620,27 @@ ProcessReady* ProcessReady::New(::google::protobuf::Arena* arena) const {
 
 void ProcessReady::Clear() {
 // @@protoc_insertion_point(message_clear_start:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady)
-  port_ = 0;
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(ProcessReady, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ProcessReady*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&(first), 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(port_, maxconcurrentgamesessions_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
   logpathstoupload_.Clear();
 }
 
@@ -653,6 +681,21 @@ bool ProcessReady::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &port_)));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_maxConcurrentGameSessions;
+        break;
+      }
+
+      // optional int32 maxConcurrentGameSessions = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_maxConcurrentGameSessions:
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &maxconcurrentgamesessions_)));
         } else {
           goto handle_unusual;
         }
@@ -699,6 +742,11 @@ void ProcessReady::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->port(), output);
   }
 
+  // optional int32 maxConcurrentGameSessions = 3;
+  if (this->maxconcurrentgamesessions() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->maxconcurrentgamesessions(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady)
 }
 
@@ -721,6 +769,11 @@ void ProcessReady::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->port(), target);
   }
 
+  // optional int32 maxConcurrentGameSessions = 3;
+  if (this->maxconcurrentgamesessions() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->maxconcurrentgamesessions(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady)
   return target;
 }
@@ -734,6 +787,13 @@ size_t ProcessReady::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->port());
+  }
+
+  // optional int32 maxConcurrentGameSessions = 3;
+  if (this->maxconcurrentgamesessions() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->maxconcurrentgamesessions());
   }
 
   // repeated string logPathsToUpload = 1;
@@ -781,6 +841,9 @@ void ProcessReady::UnsafeMergeFrom(const ProcessReady& from) {
   if (from.port() != 0) {
     set_port(from.port());
   }
+  if (from.maxconcurrentgamesessions() != 0) {
+    set_maxconcurrentgamesessions(from.maxconcurrentgamesessions());
+  }
 }
 
 void ProcessReady::CopyFrom(const ::google::protobuf::Message& from) {
@@ -809,6 +872,7 @@ void ProcessReady::Swap(ProcessReady* other) {
 void ProcessReady::InternalSwap(ProcessReady* other) {
   logpathstoupload_.UnsafeArenaSwap(&other->logpathstoupload_);
   std::swap(port_, other->port_);
+  std::swap(maxconcurrentgamesessions_, other->maxconcurrentgamesessions_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -891,6 +955,20 @@ void ProcessReady::set_port(::google::protobuf::int32 value) {
   
   port_ = value;
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.port)
+}
+
+// optional int32 maxConcurrentGameSessions = 3;
+void ProcessReady::clear_maxconcurrentgamesessions() {
+  maxconcurrentgamesessions_ = 0;
+}
+::google::protobuf::int32 ProcessReady::maxconcurrentgamesessions() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.maxConcurrentGameSessions)
+  return maxconcurrentgamesessions_;
+}
+void ProcessReady::set_maxconcurrentgamesessions(::google::protobuf::int32 value) {
+  
+  maxconcurrentgamesessions_ = value;
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.ProcessReady.maxConcurrentGameSessions)
 }
 
 inline const ProcessReady* ProcessReady::internal_default_instance() {
@@ -1090,6 +1168,7 @@ inline const ProcessEnding* ProcessEnding::internal_default_instance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int GameSessionActivate::kGameSessionIdFieldNumber;
 const int GameSessionActivate::kMaxPlayersFieldNumber;
+const int GameSessionActivate::kPortFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 GameSessionActivate::GameSessionActivate()
@@ -1112,7 +1191,8 @@ GameSessionActivate::GameSessionActivate(const GameSessionActivate& from)
 
 void GameSessionActivate::SharedCtor() {
   gamesessionid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  maxplayers_ = 0;
+  ::memset(&maxplayers_, 0, reinterpret_cast<char*>(&port_) -
+    reinterpret_cast<char*>(&maxplayers_) + sizeof(port_));
   _cached_size_ = 0;
 }
 
@@ -1152,8 +1232,28 @@ GameSessionActivate* GameSessionActivate::New(::google::protobuf::Arena* arena) 
 
 void GameSessionActivate::Clear() {
 // @@protoc_insertion_point(message_clear_start:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(GameSessionActivate, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<GameSessionActivate*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&(first), 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(maxplayers_, port_);
   gamesessionid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  maxplayers_ = 0;
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool GameSessionActivate::MergePartialFromCodedStream(
@@ -1190,6 +1290,21 @@ bool GameSessionActivate::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &maxplayers_)));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_port;
+        break;
+      }
+
+      // optional int32 port = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_port:
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &port_)));
         } else {
           goto handle_unusual;
         }
@@ -1236,6 +1351,11 @@ void GameSessionActivate::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->maxplayers(), output);
   }
 
+  // optional int32 port = 3;
+  if (this->port() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->port(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate)
 }
 
@@ -1259,6 +1379,11 @@ void GameSessionActivate::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->maxplayers(), target);
   }
 
+  // optional int32 port = 3;
+  if (this->port() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->port(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate)
   return target;
 }
@@ -1279,6 +1404,13 @@ size_t GameSessionActivate::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->maxplayers());
+  }
+
+  // optional int32 port = 3;
+  if (this->port() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->port());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1321,6 +1453,9 @@ void GameSessionActivate::UnsafeMergeFrom(const GameSessionActivate& from) {
   if (from.maxplayers() != 0) {
     set_maxplayers(from.maxplayers());
   }
+  if (from.port() != 0) {
+    set_port(from.port());
+  }
 }
 
 void GameSessionActivate::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1349,6 +1484,7 @@ void GameSessionActivate::Swap(GameSessionActivate* other) {
 void GameSessionActivate::InternalSwap(GameSessionActivate* other) {
   gamesessionid_.Swap(&other->gamesessionid_);
   std::swap(maxplayers_, other->maxplayers_);
+  std::swap(port_, other->port_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1420,6 +1556,20 @@ void GameSessionActivate::set_maxplayers(::google::protobuf::int32 value) {
   
   maxplayers_ = value;
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.maxPlayers)
+}
+
+// optional int32 port = 3;
+void GameSessionActivate::clear_port() {
+  port_ = 0;
+}
+::google::protobuf::int32 GameSessionActivate::port() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.port)
+  return port_;
+}
+void GameSessionActivate::set_port(::google::protobuf::int32 value) {
+  
+  port_ = value;
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSessionActivate.port)
 }
 
 inline const GameSessionActivate* GameSessionActivate::internal_default_instance() {
@@ -5056,6 +5206,8 @@ const int GameSession::kJoinableFieldNumber;
 const int GameSession::kGamePropertiesFieldNumber;
 const int GameSession::kIpAddressFieldNumber;
 const int GameSession::kPortFieldNumber;
+const int GameSession::kGameSessionDataFieldNumber;
+const int GameSession::kMatchmakerDataFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 GameSession::GameSession()
@@ -5081,6 +5233,8 @@ void GameSession::SharedCtor() {
   fleetid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ipaddress_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  gamesessiondata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  matchmakerdata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&maxplayers_, 0, reinterpret_cast<char*>(&port_) -
     reinterpret_cast<char*>(&maxplayers_) + sizeof(port_));
   _cached_size_ = 0;
@@ -5096,6 +5250,8 @@ void GameSession::SharedDtor() {
   fleetid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ipaddress_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  gamesessiondata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  matchmakerdata_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void GameSession::SetCachedSize(int size) const {
@@ -5146,6 +5302,8 @@ void GameSession::Clear() {
   fleetid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ipaddress_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  gamesessiondata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  matchmakerdata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -5288,6 +5446,40 @@ bool GameSession::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(74)) goto parse_gameSessionData;
+        break;
+      }
+
+      // optional string gameSessionData = 9;
+      case 9: {
+        if (tag == 74) {
+         parse_gameSessionData:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_gamesessiondata()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->gamesessiondata().data(), this->gamesessiondata().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData"));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(82)) goto parse_matchmakerData;
+        break;
+      }
+
+      // optional string matchmakerData = 10;
+      case 10: {
+        if (tag == 82) {
+         parse_matchmakerData:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_matchmakerdata()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->matchmakerdata().data(), this->matchmakerdata().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -5377,6 +5569,26 @@ void GameSession::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->port(), output);
   }
 
+  // optional string gameSessionData = 9;
+  if (this->gamesessiondata().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->gamesessiondata().data(), this->gamesessiondata().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      9, this->gamesessiondata(), output);
+  }
+
+  // optional string matchmakerData = 10;
+  if (this->matchmakerdata().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->matchmakerdata().data(), this->matchmakerdata().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      10, this->matchmakerdata(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:com.amazon.whitewater.auxproxy.pbuffer.GameSession)
 }
 
@@ -5450,6 +5662,28 @@ void GameSession::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->port(), target);
   }
 
+  // optional string gameSessionData = 9;
+  if (this->gamesessiondata().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->gamesessiondata().data(), this->gamesessiondata().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        9, this->gamesessiondata(), target);
+  }
+
+  // optional string matchmakerData = 10;
+  if (this->matchmakerdata().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->matchmakerdata().data(), this->matchmakerdata().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        10, this->matchmakerdata(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:com.amazon.whitewater.auxproxy.pbuffer.GameSession)
   return target;
 }
@@ -5503,6 +5737,20 @@ size_t GameSession::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->port());
+  }
+
+  // optional string gameSessionData = 9;
+  if (this->gamesessiondata().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->gamesessiondata());
+  }
+
+  // optional string matchmakerData = 10;
+  if (this->matchmakerdata().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->matchmakerdata());
   }
 
   // repeated .com.amazon.whitewater.auxproxy.pbuffer.GameProperty gameProperties = 6;
@@ -5575,6 +5823,14 @@ void GameSession::UnsafeMergeFrom(const GameSession& from) {
   if (from.port() != 0) {
     set_port(from.port());
   }
+  if (from.gamesessiondata().size() > 0) {
+
+    gamesessiondata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.gamesessiondata_);
+  }
+  if (from.matchmakerdata().size() > 0) {
+
+    matchmakerdata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.matchmakerdata_);
+  }
 }
 
 void GameSession::CopyFrom(const ::google::protobuf::Message& from) {
@@ -5609,6 +5865,8 @@ void GameSession::InternalSwap(GameSession* other) {
   gameproperties_.UnsafeArenaSwap(&other->gameproperties_);
   ipaddress_.Swap(&other->ipaddress_);
   std::swap(port_, other->port_);
+  gamesessiondata_.Swap(&other->gamesessiondata_);
+  matchmakerdata_.Swap(&other->matchmakerdata_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -5870,6 +6128,94 @@ void GameSession::set_port(::google::protobuf::int32 value) {
   
   port_ = value;
   // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.port)
+}
+
+// optional string gameSessionData = 9;
+void GameSession::clear_gamesessiondata() {
+  gamesessiondata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& GameSession::gamesessiondata() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  return gamesessiondata_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void GameSession::set_gamesessiondata(const ::std::string& value) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+void GameSession::set_gamesessiondata(const char* value) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+void GameSession::set_gamesessiondata(const char* value, size_t size) {
+  
+  gamesessiondata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+::std::string* GameSession::mutable_gamesessiondata() {
+  
+  // @@protoc_insertion_point(field_mutable:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  return gamesessiondata_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* GameSession::release_gamesessiondata() {
+  // @@protoc_insertion_point(field_release:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+  
+  return gamesessiondata_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void GameSession::set_allocated_gamesessiondata(::std::string* gamesessiondata) {
+  if (gamesessiondata != NULL) {
+    
+  } else {
+    
+  }
+  gamesessiondata_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), gamesessiondata);
+  // @@protoc_insertion_point(field_set_allocated:com.amazon.whitewater.auxproxy.pbuffer.GameSession.gameSessionData)
+}
+
+// optional string matchmakerData = 10;
+void GameSession::clear_matchmakerdata() {
+  matchmakerdata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& GameSession::matchmakerdata() const {
+  // @@protoc_insertion_point(field_get:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  return matchmakerdata_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void GameSession::set_matchmakerdata(const ::std::string& value) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+void GameSession::set_matchmakerdata(const char* value) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+void GameSession::set_matchmakerdata(const char* value, size_t size) {
+  
+  matchmakerdata_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+}
+::std::string* GameSession::mutable_matchmakerdata() {
+  
+  // @@protoc_insertion_point(field_mutable:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  return matchmakerdata_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* GameSession::release_matchmakerdata() {
+  // @@protoc_insertion_point(field_release:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
+  
+  return matchmakerdata_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void GameSession::set_allocated_matchmakerdata(::std::string* matchmakerdata) {
+  if (matchmakerdata != NULL) {
+    
+  } else {
+    
+  }
+  matchmakerdata_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), matchmakerdata);
+  // @@protoc_insertion_point(field_set_allocated:com.amazon.whitewater.auxproxy.pbuffer.GameSession.matchmakerData)
 }
 
 inline const GameSession* GameSession::internal_default_instance() {

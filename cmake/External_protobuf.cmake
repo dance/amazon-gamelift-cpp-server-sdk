@@ -16,6 +16,7 @@ elseif(WIN32)
        protobuf-src
        DOWNLOAD_DIR ${download_dir}
        URL https://github.com/google/protobuf/releases/download/v3.1.0/protobuf-cpp-3.1.0.tar.gz
+       URL_MD5 bd5e3eed635a8d32e2b99658633815ef
        SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/protobuf"
        UPDATE_COMMAND ""
        PATCH_COMMAND ""

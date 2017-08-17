@@ -113,5 +113,6 @@ cmake -DUSE_SYSTEM_SIOCLIENT=1 ..
 
 Option to choose whether to build in debug or release.  Options are Debug or Release (case sensitive).  Default is Release.
 ```sh
-cmake -DCMAKE_BUILD_TYPE=Debug
+cmake -DCMAKE_BUILD_TYPE=Debug ..
 ```
+
