@@ -81,7 +81,9 @@ GenericOutcome Server::ProcessEnding()
     }
 
     Internal::GameLiftServerState* serverState = static_cast<Internal::GameLiftServerState*>(giOutcome.GetResult());
-    return serverState->ProcessEnding();
+	GenericOutcome processEndingOutcome = serverState->ProcessEnding();
+	GenericOutcome shutdownOutcome = serverState->ShutdownNetworking();
+	return GenericOutcome(nullptr);
 }
 
 GenericOutcome Server::ActivateGameSession()
@@ -233,7 +235,9 @@ GenericOutcome Server::ProcessEnding()
     }
 
     Internal::GameLiftServerState* serverState = static_cast<Internal::GameLiftServerState*>(giOutcome.GetResult());
-    return serverState->ProcessEnding();
+	GenericOutcome processEndingOutcome = serverState->ProcessEnding();
+	GenericOutcome shutdownOutcome = serverState->ShutdownNetworking();
+	return GenericOutcome(nullptr);
 }
 
 GenericOutcome Server::ActivateGameSession()

@@ -73,10 +73,14 @@ GenericOutcome Internal::GameLiftServerState::ProcessReady(const Aws::GameLift::
 
 void Internal::GameLiftServerState::HealthCheck()
 {
+	std::unique_lock<std::mutex> lk(m_lockHealthCheck);
     while (m_processReady)
     {
         std::async(std::launch::async, &Internal::GameLiftServerState::ReportHealth, this);
-        std::this_thread::sleep_for(std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS));
+		//std::this_thread::sleep_for(std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS));
+
+		std::chrono::system_clock::time_point timeoutSeconds = std::chrono::system_clock::now() + std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS);
+		m_condHealthCheck.wait_until(m_lockHealthCheck, timeoutSeconds, [this]() {return !m_processReady; });
     }
 }
 
@@ -99,7 +103,11 @@ void Internal::GameLiftServerState::ReportHealth()
 
 ::GenericOutcome Internal::GameLiftServerState::ProcessEnding()
 {
-    m_processReady = false;
+	{
+		std::lock_guard<std::mutex> lk(m_lockHealthCheck);
+		m_processReady = false;
+	}
+	m_condHealthCheck.notify_one();
 
     if (AssertNetworkInitialized())
     {
@@ -124,6 +132,24 @@ GenericOutcome Internal::GameLiftServerState::InitializeNetworking()
     sio::client* sioClient = new sio::client;
     Network::AuxProxyMessageSender* sender = new Network::AuxProxyMessageSender(sioClient);
     m_network = new Network::Network(sioClient, this, sender);
+
+	if (AssertNetworkInitialized())
+	{
+		return GenericOutcome(GameLiftError(GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED));
+	}
+
+    return GenericOutcome(nullptr);
+}
+
+GenericOutcome Internal::GameLiftServerState::ShutdownNetworking()
+{
+	if (AssertNetworkInitialized())
+	{
+		return GenericOutcome(GameLiftError(GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED));
+	}
+
+	delete m_network;
+	m_network = nullptr;
 
     return GenericOutcome(nullptr);
 }
@@ -231,7 +257,7 @@ void Internal::GameLiftServerState::OnTerminateProcess()
 
 bool Internal::GameLiftServerState::AssertNetworkInitialized()
 {
-    return !m_network || !m_network->getAuxProxySender();
+    return !m_network || !m_network->getAuxProxySender() || !m_network->IsConnected();
 }
 
 #else
@@ -293,10 +319,14 @@ GenericOutcome Internal::GameLiftServerState::ProcessReady(const Aws::GameLift::
 
 void Internal::GameLiftServerState::HealthCheck()
 {
+	std::unique_lock<std::mutex> lk(m_lockHealthCheck);
     while (m_processReady)
     {
         std::async(std::launch::async, &Internal::GameLiftServerState::ReportHealth, this);
-        std::this_thread::sleep_for(std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS));
+        //std::this_thread::sleep_for(std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS));
+		
+		std::chrono::system_clock::time_point timeoutSeconds = std::chrono::system_clock::now() + std::chrono::seconds(HEALTHCHECK_TIMEOUT_SECONDS);
+		m_condHealthCheck.wait_until(m_lockHealthCheck, timeoutSeconds, [this]() {return !m_processReady; });
     }
 }
 
@@ -319,7 +349,11 @@ void Internal::GameLiftServerState::ReportHealth()
 
 ::GenericOutcome Internal::GameLiftServerState::ProcessEnding()
 {
-    m_processReady = false;
+	{
+		std::lock_guard<std::mutex> lk(m_lockHealthCheck);
+		m_processReady = false;
+	}
+	m_condHealthCheck.notify_one();
 
     if (AssertNetworkInitialized())
     {
@@ -344,6 +378,24 @@ GenericOutcome Internal::GameLiftServerState::InitializeNetworking()
     sio::client* sioClient = new sio::client;
     Network::AuxProxyMessageSender* sender = new Network::AuxProxyMessageSender(sioClient);
     m_network = new Network::Network(sioClient, this, sender);
+
+	if (AssertNetworkInitialized())
+	{
+		return GenericOutcome(GameLiftError(GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED));
+	}
+
+    return GenericOutcome(nullptr);
+}
+
+GenericOutcome Internal::GameLiftServerState::ShutdownNetworking()
+{
+	if (AssertNetworkInitialized())
+	{
+		return GenericOutcome(GameLiftError(GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED));
+	}
+
+	delete m_network;
+	m_network = nullptr;
 
     return GenericOutcome(nullptr);
 }
@@ -451,7 +503,7 @@ void Internal::GameLiftServerState::OnTerminateProcess()
 
 bool Internal::GameLiftServerState::AssertNetworkInitialized()
 {
-    return !m_network || !m_network->getAuxProxySender();
+    return !m_network || !m_network->getAuxProxySender() || !m_network->IsConnected();
 }
 #endif
 

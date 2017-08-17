@@ -14,6 +14,7 @@
 #include <aws/gamelift/internal/GameLiftCommonState.h>
 #include <aws/gamelift/server/GameLiftServerAPI.h>
 #include <aws/gamelift/internal/network/Network.h>
+#include <condition_variable>
 
 namespace Aws
 {
@@ -47,6 +48,8 @@ namespace Internal
         GenericOutcome ProcessEnding();
 
         GenericOutcome InitializeNetworking();
+
+        GenericOutcome ShutdownNetworking();
 
         GenericOutcome ActivateGameSession();
 
@@ -83,12 +86,15 @@ namespace Internal
         std::function<void()> m_onProcessTerminate;
         std::function<bool()> m_onHealthCheck;
 
-        bool m_processReady;
+        volatile bool m_processReady;
 
         //Only one game session per process.
         std::string m_gameSessionId;
 
         Aws::GameLift::Internal::Network::Network* m_network;
+
+		std::mutex m_lockHealthCheck;
+		std::condition_variable_any m_condHealthCheck;
 #else
     public:
 
@@ -107,6 +113,8 @@ namespace Internal
         GenericOutcome ProcessEnding();
 
         GenericOutcome InitializeNetworking();
+
+		GenericOutcome ShutdownNetworking();
 
         GenericOutcome ActivateGameSession();
 
@@ -151,12 +159,15 @@ namespace Internal
         void* processTerminateState;
         void* healthCheckState;
 
-        bool m_processReady;
+		volatile bool m_processReady;
 
         //Only one game session per process.
         std::string m_gameSessionId;
 
         Aws::GameLift::Internal::Network::Network* m_network;
+
+		std::mutex m_lockHealthCheck;
+		std::condition_variable m_condHealthCheck;
 #endif
     };
 
