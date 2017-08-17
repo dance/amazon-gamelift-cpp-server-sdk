@@ -39,6 +39,8 @@ namespace Network
         void OnStartGameSession(std::string const& name, sio::message::ptr const& data, bool hasAck, sio::message::list &ack_resp);
         void OnTerminateProcess(std::string const& name, sio::message::ptr const& data, bool hasAck, sio::message::list &ack_resp);
 
+		bool IsConnected() { return m_connect_finish; };
+
         AuxProxyMessageSender* getAuxProxySender() { return m_sender; };
 
     private:

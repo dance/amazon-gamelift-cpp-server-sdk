@@ -84,7 +84,9 @@ Network::Network(sio::client* sioClient, AuxProxyMessageHandler* handler, AuxPro
 
 Network::~Network()
 {
-    m_sio_client->close();
+	m_sio_client->socket()->off_all();
+    m_sio_client->sync_close();
+	delete m_sio_client;
     m_sio_client = nullptr;
     m_handler = nullptr;
     m_sender = nullptr;
@@ -93,8 +95,8 @@ Network::~Network()
 void Network::OnConnected()
 {
     m_lock.lock();
+	m_connect_finish = true;
     m_cond.notify_all();
-    m_connect_finish = true;
 
     using std::placeholders::_1;
     using std::placeholders::_2;
@@ -107,6 +109,8 @@ void Network::OnConnected()
 
 void Network::OnFail()
 {
+	m_cond.notify_all();
+
 	m_sio_client->socket()->off_all();
 }
 
